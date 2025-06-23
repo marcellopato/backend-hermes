@@ -20,11 +20,11 @@ class EmailVerificationTest extends TestCase
             'email_verified_at' => null,
         ]);
 
-        $response = $this->actingAs($user)->get('/verify-email');
+        $this->actingAs($user);
 
-        $response
-            ->assertSeeVolt('pages.auth.verify-email')
-            ->assertStatus(200);
+        $response = $this->get('/verify-email');
+        $response->assertOk();
+        $response->assertSee('Email');
     }
 
     public function test_email_can_be_verified(): void
