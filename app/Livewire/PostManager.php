@@ -69,6 +69,10 @@ class PostManager extends Component
             'imageFile' => 'nullable|image|max:5000',
         ]);
         if ($this->imageFile) {
+            // Excluir imagem antiga se existir
+            if ($this->isEdit && $this->image && file_exists(public_path($this->image))) {
+                @unlink(public_path($this->image));
+            }
             $imagePath = $this->imageFile->store('posts', 'public');
             $data['image'] = '/storage/' . $imagePath;
         } else if ($this->isEdit && $this->image) {
