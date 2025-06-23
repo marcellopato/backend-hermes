@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(RolesAndPermissionsSeeder::class);
+        $this->call(UserWithRolesSeeder::class);
+        $this->call(ProductSeeder::class);
     }
 }
