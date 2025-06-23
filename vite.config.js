@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+import path from 'path';
 
 export default defineConfig({
     plugins: [
@@ -10,5 +12,13 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+        viteStaticCopy({
+            targets: [
+                {
+                    src: path.resolve(__dirname, 'vendor/tinymce/tinymce'),
+                    dest: 'js'
+                }
+            ]
+        })
     ],
 });
