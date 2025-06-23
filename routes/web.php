@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,11 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/produtos', App\Livewire\ProductManager::class)
+        ->name('produtos')
+        ->middleware('role:admin|manager|vendor');
+});
 
 require __DIR__.'/auth.php';
