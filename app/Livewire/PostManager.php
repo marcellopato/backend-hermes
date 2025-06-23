@@ -66,7 +66,7 @@ class PostManager extends Component
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'status' => 'required|in:draft,published,archived',
-            'imageFile' => 'nullable|image|max:2048',
+            'imageFile' => 'nullable|image|max:5000',
         ]);
         if ($this->imageFile) {
             $imagePath = $this->imageFile->store('posts', 'public');

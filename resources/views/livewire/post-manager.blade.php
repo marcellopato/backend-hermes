@@ -28,7 +28,7 @@
                     </div>
                     <div class="mb-2" x-data x-init="window.initTinyMCE && window.initTinyMCE()">
                         <label class="block font-semibold">Conteúdo</label>
-                        <livewire:jodit-text-editor wire:model.live="content" />
+                        <livewire:jodit-text-editor wire:model.live="content" wire:key="jodit-editor-{{ $isEdit ? $post_id : 'new' }}" />
                         @error('content') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                     </div>
                     <div class="mb-2">
