@@ -117,8 +117,16 @@
                             @endif
                         </td>
                         <td class="px-4 py-2 border">
-                            <button wire:click="showEditForm({{ $product->id }})" class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600">Editar</button>
-                            <button wire:click="delete({{ $product->id }})" class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 ml-2" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>
+                            <button wire:click="showEditForm({{ $product->id }})" class="text-yellow-500 hover:text-yellow-700" title="Editar">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487a2.1 2.1 0 1 1 2.97 2.97L7.5 19.79l-4 1 1-4 12.362-12.303z" />
+                                </svg>
+                            </button>
+                            <button wire:click="delete({{ $product->id }})" class="text-red-600 hover:text-red-800 ml-2" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
                         </td>
                     </tr>
                 @endforeach

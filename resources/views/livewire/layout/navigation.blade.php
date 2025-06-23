@@ -38,6 +38,11 @@ new class extends Component
                             {{ __('Produtos') }}
                         </x-nav-link>
                     @endif
+                    @if(auth()->user() && auth()->user()->hasAnyRole(['admin', 'manager', 'redator']))
+                        <x-nav-link :href="route('postagens')" :active="request()->routeIs('postagens')" wire:navigate>
+                            {{ __('Postagens') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -92,6 +97,11 @@ new class extends Component
             @if(auth()->user() && auth()->user()->hasAnyRole(['admin', 'manager', 'vendor']))
                 <x-responsive-nav-link :href="route('produtos')" :active="request()->routeIs('produtos')" wire:navigate>
                     {{ __('Produtos') }}
+                </x-responsive-nav-link>
+            @endif
+            @if(auth()->user() && auth()->user()->hasAnyRole(['admin', 'manager', 'redator']))
+                <x-responsive-nav-link :href="route('postagens')" :active="request()->routeIs('postagens')" wire:navigate>
+                    {{ __('Postagens') }}
                 </x-responsive-nav-link>
             @endif
         </div>

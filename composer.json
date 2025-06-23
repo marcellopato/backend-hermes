@@ -13,7 +13,9 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
+        "mantix/livewire-jodit-text-editor": "^1.6",
         "spatie/laravel-permission": "^6.20",
+        "tinymce/tinymce": "^7.9",
         "tymon/jwt-auth": "^2.2"
     },
     "require-dev": {

@@ -13,6 +13,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Jodit Editor CSS -->
+        <link rel="stylesheet" href="//unpkg.com/jodit@4.1.16/es2021/jodit.min.css">
+        <!-- Jodit Editor JS -->
+        <script src="//unpkg.com/jodit@4.1.16/es2021/jodit.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">

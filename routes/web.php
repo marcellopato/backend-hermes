@@ -28,6 +28,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/produtos', App\Livewire\ProductManager::class)
         ->name('produtos')
         ->middleware('role:admin|manager|vendor');
+    Route::get('/postagens', App\Livewire\PostManager::class)
+        ->name('postagens')
+        ->middleware('role:admin|manager|redator');
 });
 
 require __DIR__.'/auth.php';
