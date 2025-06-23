@@ -1,66 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Hermés CMS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Requisitos
+- Docker e Docker Compose **ou** Laravel Sail
+- PHP 8.2+
+- Composer
+- Node.js e npm (para assets frontend)
 
-## About Laravel
+## Instalação
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 1. Clone o repositório
+```bash
+ git clone <[URL_DO_REPOSITORIO](https://github.com/marcellopato/backend-hermes.git)>
+ cd hermes
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 2. Copie o arquivo de ambiente
+```bash
+cp .env.example .env
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 3. Suba o ambiente com Docker Compose
+```bash
+docker-compose up -d
+```
 
-## Learning Laravel
+#### Ou usando Laravel Sail
+```bash
+./vendor/bin/sail up -d
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 4. Instale as dependências PHP e JS
+```bash
+composer install
+npm install && npm run build
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 5. Gere a chave da aplicação
+```bash
+php artisan key:generate
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 6. Rode as migrations e seeders
+```bash
+php artisan migrate --seed
+```
 
-## Laravel Sponsors
+Ou apenas os seeders:
+```bash
+php artisan db:seed
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 7. Credenciais de acesso
+Os seeders criam usuários de teste. Veja em `database/seeders/UserWithRolesSeeder.php` as credenciais geradas, por exemplo:
+- **Email:** admin@example.com
+- **Senha:** password
 
-### Premium Partners
+(Altere conforme o que está no seu seeder)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Rodando os testes
 
-## Contributing
+Execute todos os testes automatizados:
+```bash
+php artisan test
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Resultado esperado
+```
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                                                                                                                                                                    0.13s  
 
-## Code of Conduct
+   PASS  Tests\Feature\Auth\AuthenticationTest
+  ✓ login screen can be rendered                                                                                                                                                                                         8.01s  
+  ✓ users can authenticate using the login screen                                                                                                                                                                        7.21s  
+  ✓ users can not authenticate with invalid password                                                                                                                                                                     0.69s  
+  ✓ navigation menu can be rendered                                                                                                                                                                                      0.48s  
+  ✓ users can logout                                                                                                                                                                                                     0.26s  
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   PASS  Tests\Feature\Auth\EmailVerificationTest
+  ✓ email verification screen can be rendered                                                                                                                                                                            0.19s  
+  ✓ email can be verified                                                                                                                                                                                                0.41s  
+  ✓ email is not verified with invalid hash                                                                                                                                                                              0.53s  
 
-## Security Vulnerabilities
+   PASS  Tests\Feature\Auth\PasswordConfirmationTest
+  ✓ confirm password screen can be rendered                                                                                                                                                                              0.45s  
+  ✓ password can be confirmed                                                                                                                                                                                            0.44s  
+  ✓ password is not confirmed with invalid password                                                                                                                                                                      0.53s  
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   PASS  Tests\Feature\Auth\PasswordResetTest
+  ✓ reset password link screen can be rendered                                                                                                                                                                           0.29s  
+  ✓ reset password link can be requested                                                                                                                                                                                 0.90s  
+  ✓ reset password screen can be rendered                                                                                                                                                                                0.23s  
+  ✓ password can be reset with valid token                                                                                                                                                                               1.01s  
 
-## License
+   PASS  Tests\Feature\Auth\PasswordUpdateTest
+  ✓ password can be updated                                                                                                                                                                                              0.86s  
+  ✓ correct password must be provided to update password                                                                                                                                                                 0.69s  
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   PASS  Tests\Feature\Auth\RegistrationTest
+  ✓ registration screen can be rendered                                                                                                                                                                                  0.31s  
+  ✓ new users can register                                                                                                                                                                                               0.57s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                                                                                                                                                                        0.20s  
+
+   PASS  Tests\Feature\PostManagerTest
+  ✓ admin can create post                                                                                                                                                                                                1.42s  
+  ✓ admin can edit post                                                                                                                                                                                                  0.65s  
+  ✓ admin can delete post                                                                                                                                                                                                0.49s  
+  ✓ validation required fields                                                                                                                                                                                           0.58s  
+
+   PASS  Tests\Feature\ProductManagerTest
+  ✓ admin can create product                                                                                                                                                                                             0.88s  
+  ✓ admin can edit product                                                                                                                                                                                               0.69s  
+  ✓ admin can delete product                                                                                                                                                                                             0.58s  
+  ✓ validation required fields                                                                                                                                                                                           0.58s  
+  ✓ admin can upload product image                                                                                                                                                                                       0.85s  
+
+   PASS  Tests\Feature\ProfileTest
+  ✓ profile page is displayed                                                                                                                                                                                            0.71s  
+  ✓ profile information can be updated                                                                                                                                                                                   0.43s  
+  ✓ email verification status is unchanged when the email address is unchanged                                                                                                                                           0.25s  
+  ✓ user can delete their account                                                                                                                                                                                        0.50s  
+  ✓ correct password must be provided to delete account                                                                                                                                                                  0.74s  
+
+  Tests:    35 passed (107 assertions)
+  Duration: 36.03s
+```
+
+## Observações
+- O projeto utiliza Livewire, Jodit Editor, Spatie Permission e autenticação padrão do Laravel.
+- Para dúvidas ou problemas, consulte os seeders ou abra uma issue.

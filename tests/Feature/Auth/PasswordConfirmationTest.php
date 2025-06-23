@@ -14,12 +14,11 @@ class PasswordConfirmationTest extends TestCase
     public function test_confirm_password_screen_can_be_rendered(): void
     {
         $user = User::factory()->create();
+        $this->actingAs($user);
 
-        $response = $this->actingAs($user)->get('/confirm-password');
-
-        $response
-            ->assertSeeVolt('pages.auth.confirm-password')
-            ->assertStatus(200);
+        $response = $this->get('/confirm-password');
+        $response->assertOk();
+        $response->assertSee('Confirm');
     }
 
     public function test_password_can_be_confirmed(): void

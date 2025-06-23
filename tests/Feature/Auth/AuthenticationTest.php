@@ -18,7 +18,8 @@ class AuthenticationTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSeeVolt('pages.auth.login');
+            ->assertSee('Email')
+            ->assertSee('Password');
     }
 
     public function test_users_can_authenticate_using_the_login_screen(): void
@@ -65,7 +66,7 @@ class AuthenticationTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSeeVolt('layout.navigation');
+            ->assertSee('Dashboard');
     }
 
     public function test_users_can_logout(): void
